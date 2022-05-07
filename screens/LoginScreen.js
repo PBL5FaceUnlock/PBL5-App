@@ -1,51 +1,39 @@
-import { View, Text, KeyboardAvoidingView, StyleSheet,Image, TouchableOpacity, Alert} from 'react-native'
-import React, { useState,useEffect } from 'react'
+import { View, Text, KeyboardAvoidingView, StyleSheet,Image, TouchableOpacity, Alert, SafeAreaView} from 'react-native'
+import React, { useState,useEffect,useContext } from 'react'
 import { TextInput } from 'react-native-paper';
 import { auth } from '../FirebaseAuth';
 import { useNavigation } from '@react-navigation/native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { CredentialsContext } from '../components/CredentialsContext';
 
 const LoginScreen = () => {
     const [email,setEmail] = useState('')
     const [password,setPassword] = useState('')
-    const navigation = useNavigation()
+    const {storedCredentials, setStoredCredentials} = useContext(CredentialsContext);
 
-    // useEffect(() => {
-    //     const unsubscribe = auth.onAuthStateChanged(user => {
-    //       if (auth.signInWithEmailAndPassword == true) {
-    //         navigation.replace("HomeScreen")
-    //       }
-    //     })
-    
-    //     return unsubscribe
-    //   }, [])
-    
-    const handleSignUp = () => {
-        auth
-          .createUserWithEmailAndPassword(email, password)
-          .then(userCredentials => {
-            const user = userCredentials.user;
-            Alert.alert(
-                "Thông báo",
-                "Bạn đã đăng ký thành công!",
-                [
-                  { text: "OK", onPress: () => console.log('Registered with:', user.email) }
-                ]
-              );
-          })
-          .catch(error => alert(error.message))
-      }
-    
-      const handleLogin = () => {
+    const navigation = useNavigation()
+    const handleLogin = () => {
         auth
           .signInWithEmailAndPassword(email, password)
           .then(userCredentials => {
             const user = userCredentials.user;
             console.log('Logged in with:', user.email);
-            navigation.replace("HomeScreen")
+            navigation.replace("BottomTab")
+            !persistLogin(user)
           })
           .catch(error => alert(error.message))
       }
-
+    
+    const persistLogin = (credentials) => {
+      AsyncStorage.setItem('PBL5', JSON.stringify(credentials))
+      .then(()=>{
+        setStoredCredentials(credentials);
+      })
+      .catch((error)=>{
+        console.log(error)
+      })
+    }
+    
   return (
     <KeyboardAvoidingView
       style={styles.container}
@@ -80,12 +68,12 @@ const LoginScreen = () => {
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           onPress={handleLogin}
-          style={styles.button}
+          style={[styles.button, styles.buttonOutline]}
         >
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={handleSignUp}
+          onPress={() => navigation.navigate("RegisterScreen", { screen: "RegisterScreen" })}
           style={[styles.button, styles.buttonOutline]}
         >
           <Text style={styles.buttonOutlineText}>Register</Text>
@@ -102,7 +90,7 @@ const styles = StyleSheet.create({
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: '#F3F3F3'
+      backgroundColor: '#c8775d'
     },
     inputContainer: {
         left: 5,
@@ -116,7 +104,7 @@ const styles = StyleSheet.create({
       marginTop: 7,
       width:300,
       height:30,
-      borderColor:'#FDA43C',
+      borderColor:'#000000',
       borderWidth:2
     },
     buttonContainer: {
@@ -128,7 +116,7 @@ const styles = StyleSheet.create({
       top: 140,
     },
     button: {
-      backgroundColor: '#FDA43C',
+      backgroundColor: '#F3F3F3',
       width: '100%',
       padding: 15,
       borderRadius: 10,
@@ -137,7 +125,7 @@ const styles = StyleSheet.create({
     buttonOutline: {
       backgroundColor: 'white',
       marginTop: 5,
-      borderColor: '#FDA43C',
+      borderColor: '#000000',
       borderWidth: 2,
     },
     buttonText: {
@@ -147,7 +135,7 @@ const styles = StyleSheet.create({
       color: '#000000',
     },
     buttonOutlineText: {
-      color: '#FDA43C',
+      color: '#000000',
       fontWeight: '700',
       fontSize: 16,
     },
