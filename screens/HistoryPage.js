@@ -1,16 +1,18 @@
 import { View, Text,Picker,StyleSheet, FlatList, TouchableOpacity,SafeAreaView } from 'react-native'
 import React , {useState,useEffect} from 'react'
 import { ActivityIndicator } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native'
 
 
 const HistoryPage = () => {
   const [Door,setDoor] = useState('front');
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const navigation = useNavigation()
 
-  const getAllTime = () => {
-    const APIURL = 'https://pbl5.tk/Door/Doors?format=json';
-    fetch(APIURL)
+  const getAllTime = async () => {
+    const APIURL = 'http://171.251.17.171/Door/Doors?format=json';
+    await fetch(APIURL)
     .then((res) => res.json())
     .then((resJson) => {
       setData(resJson)
@@ -28,12 +30,11 @@ const HistoryPage = () => {
 
 
   const renderTime = ({item,index}) => {
+    console.log(item.time)
     return(
-      <TouchableOpacity style={[styles.card, {backgroundColor:"#96D6E6"}]}>
-      <View style={styles.cardFooter}>
-        <Text style={styles.sub}>{item.time}</Text>
-      </View>
-    </TouchableOpacity>
+      <TouchableOpacity style={[styles.card, {backgroundColor:"#FDA43C"}]}>
+          <Text style={styles.sub}>{item.time}</Text>
+      </TouchableOpacity>
     )
   }
 
@@ -54,7 +55,6 @@ const HistoryPage = () => {
           contentContainerStyle={styles.listContainer}
           data={data}
           horizontal={false}
-          numColumns={2}
           renderItem={renderTime}
           keyExtractor={item => `key-${item.name}`}
         />
@@ -72,62 +72,38 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   picker: {
-    width:30,
-    height:2,
-    marginTop:200,
+    top: 100,
     alignItems: 'center',
-    marginHorizontal:2,
-    marginVertical:2,
+    marginHorizontal:1,
+    marginVertical:1,
     flexBasis: '48%',
     borderWidth:60,
-    borderColor: '#000000',
     borderRadius: 10,
     color:'black'
   },
   list:{
-    backgroundColor:"#E6E6E6",
+    backgroundColor:"#f2f2f2",
     
   },
   listContainer:{
     alignItems:'center',
   },
-  card:{
-    marginHorizontal:2,
-    marginVertical:2,
-    flexBasis: '48%',
-    backgroundColor:'#E6E6E6',
-    
-  },
-  cardImage:{
-    height: 150,
-    width: 150,
-    alignSelf:'center',
-    marginTop:15
-
-  },
   sub:{
     fontWeight:'bold',
-    fontSize:15,
-    flex:1,
-    marginTop:5,
-    marginLeft:20,
-    color:"#000",
-  },
-  sub1:{
-    fontSize:12,
-    flex:1,
-    marginLeft:20,
-    color:"#000",
-  },
-  title:{
-    textAlign:"center",
     fontSize:20,
-    backgroundColor:"#E6E6E6"
+    flex:2,
+    marginTop:25,
+    marginLeft:40,
+    color:"#000",
   },
-  react:{
-    alignItems: "center",
-    marginBottom:5,
-    marginTop:5
-  }
+  card:{
+    marginTop:10,
+    height: 80,
+    width: 300,
+    marginHorizontal:2,
+    marginVertical:2,
+    backgroundColor:'#f2f2f2',
+    borderRadius:10
+  },
 })
 export default HistoryPage

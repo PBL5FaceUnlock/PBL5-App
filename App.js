@@ -7,6 +7,7 @@ import BottomTab from './navigation/BottomTab'
 import RegisterScreen from './screens/RegisterScreen'
 import HomeScreen from './screens/HomeScreen'
 import ProfileScreen from './screens/ProfileScreen'
+import HistoryPage from './screens/HistoryPage'
 import AppLoading from 'expo-app-loading'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { CredentialsContext } from './components/CredentialsContext';
@@ -51,6 +52,7 @@ const App = () =>{
           <Stack.Screen options = {{headerShown: false}} name="LoginScreen" component={LoginScreen} />
           <Stack.Screen options = {{headerShown: false}} name="BottomTab" component={BottomTab} />
           <Stack.Screen options = {{headerShown: false}} name="RegisterScreen" component={RegisterScreen} />
+          <Stack.Screen options = {{headerShown: false}} name="HistoryPage" component={HistoryPage} />
           <Stack.Screen options = {{headerShown: false}} name="HomeScreen" component={HomeScreen} />
           <Stack.Screen options = {{headerShown: false}} name="ProfileScreen" component={ProfileScreen} />
           </>)

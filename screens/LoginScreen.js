@@ -12,6 +12,7 @@ const LoginScreen = () => {
     const {storedCredentials, setStoredCredentials} = useContext(CredentialsContext);
 
     const navigation = useNavigation()
+
     const handleLogin = () => {
         auth
           .signInWithEmailAndPassword(email, password)

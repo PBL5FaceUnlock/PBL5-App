@@ -1,7 +1,14 @@
 import { View, Text,StyleSheet,SafeAreaView,TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, {useContext} from 'react'
+import { useNavigation } from '@react-navigation/native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { CredentialsContext } from '../components/CredentialsContext';
 
 const HomeScreen = () => {
+  const navigation = useNavigation()
+  const {storedCredentials, setStoredCredentials} = useContext(CredentialsContext);
+
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>MY HOME</Text>
