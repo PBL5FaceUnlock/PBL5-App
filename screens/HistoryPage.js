@@ -1,14 +1,27 @@
-import { View, Text,Picker,StyleSheet, FlatList, TouchableOpacity,SafeAreaView } from 'react-native'
-import React , {useState,useEffect} from 'react'
+import { View, Text,Picker,StyleSheet, FlatList, TouchableOpacity,SafeAreaView, RefreshControl, ScrollView } from 'react-native'
+import React , {useState,useEffect,useCallback} from 'react'
 import { ActivityIndicator } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native'
 
+const wait = (timeout) => {
+  return new Promise(resolve => setTimeout(resolve, timeout));
+}
 
 const HistoryPage = () => {
   const [Door,setDoor] = useState('front');
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const navigation = useNavigation()
+
+  const [refreshing, setRefreshing] = useState(false);
+
+  const handleRefresh = useCallback(() => {
+    setRefreshing(true);
+    wait(200)
+    .then(() => setRefreshing(false))
+    .finally(getAllTime)
+  }, []);
+
 
   const getAllTime = async () => {
     const APIURL = 'http://171.251.17.171/Door/Doors?format=json';
@@ -32,14 +45,22 @@ const HistoryPage = () => {
   const renderTime = ({item,index}) => {
     console.log(item.time)
     return(
-      <TouchableOpacity style={[styles.card, {backgroundColor:"#FDA43C"}]}>
+      <TouchableOpacity style={[styles.card, {backgroundColor:"#f2f2f2"}]}>
           <Text style={styles.sub}>{item.time}</Text>
       </TouchableOpacity>
     )
   }
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+    <ScrollView style={styles.ScrollView}
+      contentContainerStyle={styles.scrollView}
+      refreshControl={
+      <RefreshControl
+          refreshing={refreshing}
+            onRefresh={handleRefresh}
+          />
+        }>
       <Picker
         style={styles.picker}
         selectValue={Door}
@@ -61,7 +82,8 @@ const HistoryPage = () => {
       </SafeAreaView>
       )}
 
-    </View>
+    </ScrollView>
+    </SafeAreaView>
   )
 }
 
@@ -70,23 +92,26 @@ const styles = StyleSheet.create({
     flex:1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor:"#FDA43C",
   },
   picker: {
-    top: 100,
+    width:60,
+    height:10,
     alignItems: 'center',
     marginHorizontal:1,
     marginVertical:1,
     flexBasis: '48%',
-    borderWidth:60,
+    borderWidth:70,
     borderRadius: 10,
     color:'black'
   },
   list:{
-    backgroundColor:"#f2f2f2",
+    backgroundColor:"#FDA43C",
     
   },
   listContainer:{
     alignItems:'center',
+    backgroundColor:"#FDA43C",
   },
   sub:{
     fontWeight:'bold',
@@ -100,10 +125,11 @@ const styles = StyleSheet.create({
     marginTop:10,
     height: 80,
     width: 300,
-    marginHorizontal:2,
-    marginVertical:2,
-    backgroundColor:'#f2f2f2',
+    marginHorizontal:1,
+    marginVertical:1,
+    backgroundColor:'#FDA43C',
     borderRadius:10
   },
+  
 })
 export default HistoryPage

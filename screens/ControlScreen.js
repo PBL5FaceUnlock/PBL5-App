@@ -1,9 +1,12 @@
-import { View, Text, Switch, SafeAreaView, StyleSheet, Picker} from 'react-native'
-import React, {useState,useEffect} from 'react'
+import { View, Text, Switch, SafeAreaView, StyleSheet, Picker, RefreshControl} from 'react-native'
+import React, {useState,useEffect,useCallback} from 'react'
+
+
 
 const ControlScreen = () => {
   const [Door,setDoor] = useState('front');
   const [switchVal, setSwitchVal] = useState(false);
+
 
   return (
     <SafeAreaView style={styles.container}>
