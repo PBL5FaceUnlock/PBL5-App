@@ -50,8 +50,8 @@ const RegisterScreen = () => {
               { text: "Thử lại", onPress: () => console.log('Account Registration Failed! ') }
             ]
           );
-          persistRegister(user);
         }
+        persistRegister(user);
       }
       const persistRegister = (credentials) => {
         AsyncStorage.setItem('PBL5', JSON.stringify(credentials))

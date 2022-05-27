@@ -169,4 +169,4 @@ const styles = StyleSheet.create({
         left: 5,
         top: 8,
     }
-  })
+  })  

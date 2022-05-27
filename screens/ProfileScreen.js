@@ -22,6 +22,8 @@ const ProfileScreen = () => {
     .catch(error => console.log(error))
 
   }
+  
+
 
 
   return (

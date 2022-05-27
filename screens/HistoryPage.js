@@ -1,66 +1,34 @@
-import { View, Text,Picker,StyleSheet, FlatList, TouchableOpacity,SafeAreaView, RefreshControl, ScrollView } from 'react-native'
-import React , {useState,useEffect,useCallback} from 'react'
+import { Picker,StyleSheet, FlatList,SafeAreaView, RefreshControl } from 'react-native'
+import React , {useState,useEffect} from 'react'
 import { ActivityIndicator } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native'
+import ItemHistory from '../components/ItemHistory';
 
-const wait = (timeout) => {
-  return new Promise(resolve => setTimeout(resolve, timeout));
-}
+const APIURL = 'http://171.251.17.171/Image_To_Android/?format=json';
 
 const HistoryPage = () => {
   const [Door,setDoor] = useState('front');
   const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const navigation = useNavigation()
+  const [isLoading, setIsLoading] = useState(false);
 
-  const [refreshing, setRefreshing] = useState(false);
-
-  const handleRefresh = useCallback(() => {
-    setRefreshing(true);
-    wait(200)
-    .then(() => setRefreshing(false))
-    .finally(getAllTime)
-  }, []);
-
-
-  const getAllTime = async () => {
-    const APIURL = 'http://171.251.17.171/Door/Doors?format=json';
-    await fetch(APIURL)
-    .then((res) => res.json())
-    .then((resJson) => {
-      setData(resJson)
-    }).catch((error) => {
-        console.log("Error: ", error)
-    }).finally(() => setIsLoading(false))
+  const fetchDataAllTime = async () => {
+    try{
+      setIsLoading(true)
+      const response = await fetch(APIURL)
+      const result = await response.json()
+      setData(result)
+    }catch(e){
+       console.log("Error on fetchDataAllTime: ", e)
+    }finally {
+      setIsLoading(false)
+    }
   }
 
   useEffect(() => {
-    getAllTime();
-    return () => {
-      
-    }
+    fetchDataAllTime();
   }, [])
-
-
-  const renderTime = ({item,index}) => {
-    console.log(item.time)
-    return(
-      <TouchableOpacity style={[styles.card, {backgroundColor:"#f2f2f2"}]}>
-          <Text style={styles.sub}>{item.time}</Text>
-      </TouchableOpacity>
-    )
-  }
 
   return (
     <SafeAreaView style={styles.container}>
-    <ScrollView style={styles.ScrollView}
-      contentContainerStyle={styles.scrollView}
-      refreshControl={
-      <RefreshControl
-          refreshing={refreshing}
-            onRefresh={handleRefresh}
-          />
-        }>
       <Picker
         style={styles.picker}
         selectValue={Door}
@@ -70,19 +38,21 @@ const HistoryPage = () => {
         <Picker.Item label='Back' value='Back'/>
       </Picker>
       {isLoading ? <ActivityIndicator/>:(
-      <SafeAreaView>
         <FlatList
           style={styles.list} 
           contentContainerStyle={styles.listContainer}
           data={data}
           horizontal={false}
-          renderItem={renderTime}
-          keyExtractor={item => `key-${item.name}`}
+          renderItem={({item}) => <ItemHistory historyData={item}/>}
+          keyExtractor={item => `key-${item.id}`}
+          refreshControl={
+          <RefreshControl
+              refreshing={isLoading}
+                onRefresh={fetchDataAllTime}
+              />
+             }
         />
-      </SafeAreaView>
       )}
-
-    </ScrollView>
     </SafeAreaView>
   )
 }
@@ -95,12 +65,11 @@ const styles = StyleSheet.create({
     backgroundColor:"#FDA43C",
   },
   picker: {
-    width:60,
+    width:50,
     height:10,
     alignItems: 'center',
     marginHorizontal:1,
     marginVertical:1,
-    flexBasis: '48%',
     borderWidth:70,
     borderRadius: 10,
     color:'black'
@@ -112,23 +81,28 @@ const styles = StyleSheet.create({
   listContainer:{
     alignItems:'center',
     backgroundColor:"#FDA43C",
+    flex: 1
   },
-  sub:{
-    fontWeight:'bold',
-    fontSize:20,
-    flex:2,
-    marginTop:25,
-    marginLeft:40,
-    color:"#000",
+  modalBackGround: {
+    flex: 1,
+    backgroundColor: '#FDA43C',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  card:{
-    marginTop:10,
-    height: 80,
-    width: 300,
-    marginHorizontal:1,
-    marginVertical:1,
-    backgroundColor:'#FDA43C',
-    borderRadius:10
+  modalContainer: {
+    width: '90%',
+    height:'90%',
+    backgroundColor: 'white',
+    paddingHorizontal: 20,
+    paddingVertical: 30,
+    borderRadius: 20,
+    elevation: 20,
+  },
+  header: {
+    width: '100%',
+    height: 40,
+    alignItems: 'flex-end',
+    justifyContent: 'center',
   },
   
 })

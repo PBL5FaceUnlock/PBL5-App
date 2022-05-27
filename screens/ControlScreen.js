@@ -1,16 +1,17 @@
-import { View, Text, Switch, SafeAreaView, StyleSheet, Picker, RefreshControl} from 'react-native'
-import React, {useState,useEffect,useCallback} from 'react'
+import { View, Text, Switch, SafeAreaView, StyleSheet, Picker} from 'react-native'
+import React, {useState} from 'react'
+import { WebView } from 'react-native-webview';
 
 
 
 const ControlScreen = () => {
-  const [Door,setDoor] = useState('front');
+  const [Door,setDoor] = useState('front'); 
   const [switchVal, setSwitchVal] = useState(false);
 
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Picker
+    <View style={styles.container}>
+      {/* <Picker
           style={styles.picker}
           selectValue={Door}
           onValueChange={(itemDoor) => setDoor(itemDoor)} 
@@ -29,16 +30,24 @@ const ControlScreen = () => {
         ios_backgroundColor="#3e3e3e"
         onValueChange={() => setSwitchVal((preVal) => !preVal)}
         value={switchVal}
-      />
-    </SafeAreaView>
+      /> */}
+      <WebView
+        style={{flex: 1}}
+        automaticallyAdjustContentInsets={true}
+        scalesPageToFit={true}
+        startInLoadingState={false}
+        contentInset={{ top: 0, right: 0, left: 0, bottom: 0 }}
+        scrollEnabled={false}
+        source={{ uri: 'https://e2af-2402-800-629c-2c9b-5092-346c-80d4-ab3.ap.ngrok.io/' }} />
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      alignItems: "center",
-      justifyContent: "center"
+      // alignItems: "center",
+      // justifyContent: "center"
     },
     picker: {
       top: -200,
@@ -57,6 +66,10 @@ const styles = StyleSheet.create({
     },
     text:{
       top:-300
+    },
+    video:{
+      width:400,
+      height:400
     }
 })
 
