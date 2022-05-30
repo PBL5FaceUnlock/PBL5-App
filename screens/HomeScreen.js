@@ -20,6 +20,7 @@ const HomeScreen = () => {
         >
           <Text style={styles.buttonText}>Front</Text>
         </TouchableOpacity>
+      <Text style={styles.textdevice}>Device in use:</Text>
         <View style={styles.device}>
           <View style={styles.viewdevice}>
           <Image source={{uri: 'https://i.ibb.co/7tFbtbx/camera-icon-3d-22-1.png'}}
@@ -63,7 +64,7 @@ const styles = StyleSheet.create({
     fontStyle:'italic',
     fontSize:30,
     color: '#FFFFFF',
-    paddingRight:20,
+    paddingBottom:20,
   },
   door1:{
     backgroundColor: '#FFFFFF',
@@ -95,8 +96,8 @@ const styles = StyleSheet.create({
     width:'80%',
     left:"25%",
     height:65,
-    borderRadius:20,
-    backgroundColor:'#FFFFFF',
+    borderRadius:25,
+    backgroundColor:'#fcb057',
   },
   viewdevice:{
     width:55,
@@ -105,11 +106,23 @@ const styles = StyleSheet.create({
     top:7,
     left:20,
     borderRadius:30,
-    backgroundColor:'#FDA43C'
+    backgroundColor:'#C2771E'
   },
   imagedevice:{
     width:40,
     height:40,
     padding:25,
+  },
+  linearGradient: {
+    paddingLeft: 25,
+    paddingRight: 25,
+    borderRadius: 5
+  },
+  textdevice:{
+    top:210,
+    fontSize:20,
+    color:'#ffc777',
+    paddingLeft:100,
+    fontWeight: "bold"
   }
 })

@@ -1,4 +1,4 @@
-import { View, Text ,StyleSheet,TouchableOpacity} from 'react-native'
+import { View, Text ,StyleSheet,TouchableOpacity,ImageBackground} from 'react-native'
 import React, { useState,useEffect,useContext } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { auth } from '../FirebaseAuth'
@@ -28,13 +28,16 @@ const ProfileScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text>Email: {auth.currentUser?.email}</Text>
+    <ImageBackground style={styles.container}
+                    source = {{uri: 'https://i.ibb.co/JpjYNWX/loginpng1.png'}}>
+      <Text style={styles.emailshow}>Email: {auth.currentUser?.email}</Text>
       <TouchableOpacity
         onPress={handleSignOut}
         style={styles.button}
       >
         <Text style={styles.buttonText}>Sign out</Text>
       </TouchableOpacity>
+      </ImageBackground>
     </View>
   )
 }
@@ -45,19 +48,27 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    // alignItems: 'center'
   },
    button: {
-    backgroundColor: '#0782F9',
+    backgroundColor: '#FDA43C',
     width: '60%',
     padding: 15,
     borderRadius: 10,
     alignItems: 'center',
+    alignSelf:'center',
     marginTop: 40,
   },
   buttonText: {
-    color: 'white',
-    fontWeight: '700',
+    color: 'black',
+    fontWeight: 'bold',
     fontSize: 16,
   },
+  emailshow:{
+    alignSelf:'center',
+    fontFamily: 'Roboto',
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: 'white',
+  }
 })

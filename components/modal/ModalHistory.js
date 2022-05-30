@@ -11,26 +11,25 @@ const ModalHistory = ({historyData, visible, handleVisible}) => {
             <TouchableOpacity onPress={() => handleVisible(false)}>
               <Image
                 source={{uri:'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/OOjs_UI_icon_close.svg/2048px-OOjs_UI_icon_close.svg.png'}}
-                style={{height: 30, width: 30, bottom:10}}
+                style={{height: 30, width: 30, bottom:10,}}
               />
             </TouchableOpacity>
           </View>
         </View>
-        <View style={{alignItems: 'center'}}>
+        <Text style={styles.textid}> 
+          {id}
+        </Text>
+        <View style={{marginTop:-20,alignItems: 'center', borderColor:'#FDA43C', borderWidth:8,borderRadius:110}}>
           <Image
             source={{uri: Image_recognize_main}}
-            style={{height: 300, width: 300, marginVertical: 10}}
+            style={{height: 300, width: 300, borderRadius:100}}
           />
         </View>
-  
-        <Text style={styles.text}>
-          {time}
-        </Text>
         <Text style={styles.text}>
           {user}
         </Text>
         <Text style={styles.text}>
-          {id}
+          {time}
         </Text>
       </ModalPoup>
     )
@@ -130,8 +129,18 @@ const ModalPoup = ({visible, children}) =>{
     },
     text: {
         marginVertical: 30,
-         fontSize: 20,
-          textAlign: 'center'
+        fontSize: 20,
+        textAlign: 'center',
+        color: '#FDA43C',
+        fontWeight: 'bold'
+    },
+    textid:{
+      bottom:20,
+      marginVertical: 30,
+      fontSize: 20,
+      textAlign: 'center',
+      color: '#FDA43C',
+      fontWeight: 'bold'
     }
     
   })

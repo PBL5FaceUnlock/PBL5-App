@@ -3,15 +3,15 @@ import React, { useState,useEffect,useContext } from 'react'
 import { TextInput } from 'react-native-paper';
 import { auth } from '../FirebaseAuth';
 import { useNavigation } from '@react-navigation/native'
-import AsyncStorage from '@react-native-async-storage/async-storage'
-import { CredentialsContext } from '../components/CredentialsContext';
+// import AsyncStorage from '@react-native-async-storage/async-storage'
+// import { CredentialsContext } from '../components/CredentialsContext';
 
 const RegisterScreen = () => {
     const [email,setEmail] = useState('')
     const [password,setPassword] = useState('')
     const [repass,setrepass] = useState('')
     const [pin,setpin] = useState('')
-    const {storedCredentials, setStoredCredentials} = useContext(CredentialsContext);
+    // const {storedCredentials, setStoredCredentials} = useContext(CredentialsContext);
     const navigation = useNavigation()
 
     // useEffect(() => {
@@ -51,17 +51,16 @@ const RegisterScreen = () => {
             ]
           );
         }
-        persistRegister(user);
       }
-      const persistRegister = (credentials) => {
-        AsyncStorage.setItem('PBL5', JSON.stringify(credentials))
-        .then(()=>{
-          setStoredCredentials(credentials);
-        })
-        .catch((error)=>{
-          console.log(error)
-        })
-      }  
+      // const persistRegister = (credentials) => {
+      //   AsyncStorage.setItem('PBL5', JSON.stringify(credentials))
+      //   .then(()=>{
+      //     setStoredCredentials(credentials);
+      //   })
+      //   .catch((error)=>{
+      //     console.log(error)
+      //   })
+      // }  
 
   return (
     <KeyboardAvoidingView

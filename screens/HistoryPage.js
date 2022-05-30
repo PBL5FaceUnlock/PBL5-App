@@ -1,9 +1,9 @@
-import { Picker,StyleSheet, FlatList,SafeAreaView, RefreshControl } from 'react-native'
+import { Picker,StyleSheet, FlatList,SafeAreaView,ImageBackground, RefreshControl,View } from 'react-native'
 import React , {useState,useEffect} from 'react'
 import { ActivityIndicator } from 'react-native-paper';
 import ItemHistory from '../components/ItemHistory';
 
-const APIURL = 'http://171.251.17.171/Image_To_Android/?format=json';
+const APIURL = 'http://171.225.184.216/Image_To_Android/?format=json';
 
 const HistoryPage = () => {
   const [Door,setDoor] = useState('front');
@@ -29,6 +29,9 @@ const HistoryPage = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+        <ImageBackground style={styles.container}
+                    source = {{uri: 'https://i.ibb.co/JpjYNWX/loginpng1.png'}}>
+    <View style={styles.pickercontainer}>
       <Picker
         style={styles.picker}
         selectValue={Door}
@@ -37,7 +40,8 @@ const HistoryPage = () => {
         <Picker.Item label='Front' value='Front'/>
         <Picker.Item label='Back' value='Back'/>
       </Picker>
-      {isLoading ? <ActivityIndicator/>:(
+      </View>
+      {isLoading ? <ActivityIndicator style={styles.loading}/>:(
         <FlatList
           style={styles.list} 
           contentContainerStyle={styles.listContainer}
@@ -53,6 +57,7 @@ const HistoryPage = () => {
              }
         />
       )}
+      </ImageBackground>
     </SafeAreaView>
   )
 }
@@ -61,27 +66,24 @@ const styles = StyleSheet.create({
   container: {
     flex:1,
     justifyContent: 'center',
-    alignItems: 'center',
+    // alignItems: 'center',
     backgroundColor:"#FDA43C",
   },
   picker: {
-    width:50,
-    height:10,
-    alignItems: 'center',
-    marginHorizontal:1,
-    marginVertical:1,
+    marginVertical:-38,
     borderWidth:70,
-    borderRadius: 10,
+    width:0,
     color:'black'
   },
   list:{
     backgroundColor:"#FDA43C",
+    alignSelf:'center',
     
   },
   listContainer:{
     alignItems:'center',
+    alignSelf:'center',
     backgroundColor:"#FDA43C",
-    flex: 1
   },
   modalBackGround: {
     flex: 1,
@@ -98,12 +100,20 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     elevation: 20,
   },
-  header: {
-    width: '100%',
-    height: 40,
-    alignItems: 'flex-end',
-    justifyContent: 'center',
+  pickercontainer:{
+    marginTop:50,
+    borderWidth:3,
+    borderColor:'#000',
+    borderRadius:15,
+    width:140,
+    height:30,
+    alignSelf:'center',
+    flexBasis:'10%',
+    backgroundColor:'#FDA43C'
   },
+  loading:{
+    top:20,
+  }
   
 })
 export default HistoryPage

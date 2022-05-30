@@ -3,8 +3,8 @@ import React , {useState} from 'react'
 import ModalHistory from './modal/ModalHistory'
 
 const ItemHistory = ({historyData}) => {
-    console.log('historyData: ', historyData)
-    console.log('----------------------------------------------------------')
+    // console.log('historyData: ', historyData)
+    // console.log('----------------------------------------------------------')
 
     const [isVisibleModal, setVisibleModal] = useState(false)
     return(
@@ -14,7 +14,9 @@ const ItemHistory = ({historyData}) => {
             historyData = {historyData} 
             visible={isVisibleModal}
             handleVisible={setVisibleModal}/>
-
+            <View style={styles.viewid} >
+            <Text style={styles.sub1}>{historyData?.id || ''}</Text>
+            </View>
             <Text style={styles.sub}>{historyData?.time || ''}</Text>
         </TouchableOpacity>
     )
@@ -33,10 +35,25 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
         fontSize:20,
         flex:1,
-        marginTop:25,
-        marginLeft:40,
+        alignSelf:'center',
         color:"#000",
       },
+      sub1:{
+        fontWeight:'bold',
+        fontSize:15,
+        flex:1,
+        alignSelf:'center',
+        color:"#000",
+      },
+      viewid:{
+        marginVertical:10,
+        flex:0.5,
+        borderRadius:150,
+        borderColor:'#FDA43C',
+        alignSelf:'center',
+        borderWidth:2.4,
+
+      }
 })
 
   export default ItemHistory
