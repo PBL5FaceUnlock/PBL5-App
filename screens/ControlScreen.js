@@ -1,15 +1,13 @@
 import { View, Text, Switch, SafeAreaView,RefreshControl, ImageBackground,StyleSheet} from 'react-native'
 import React, {useState, useEffect} from 'react'
-import { ActivityIndicator } from 'react-native-paper';
 import { WebView } from 'react-native-webview';
 
-  const APIDoorURL = 'http://116.110.99.160/Door/Doors?format=json'
+  const APIDoorURL = 'http://192.168.1.129/Door/Doors?format=json'
 
 
 
   const ControlScreen = () => {
     const [switchVal, setSwitchVal] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
     const [data, setData] = useState([]);
     const fetchStatusDoor = async () => {
       try{
@@ -21,11 +19,10 @@ import { WebView } from 'react-native-webview';
       }
     }
     const handleControlDoor = () => {
-      setIsLoading(true)
       setSwitchVal((switchVal) => !switchVal)
       if(!switchVal)
       {
-      fetch("http://171.225.184.216/Door/Command_to_ESP", {
+      fetch("http://192.168.1.129/Door/Command_to_ESP", {
           method: 'POST',
           headers: {
               'Accept': 'application/json',
@@ -43,13 +40,12 @@ import { WebView } from 'react-native-webview';
                   "Response Body -> " + JSON.stringify(responseData)
               )
           })
-          .done(()=>{
-            setIsLoading(false)
-          });
+          .catch(error => alert(error.message))
+          .done();
       }
       else
       {
-        fetch("http://116.110.99.160/Door/Command_to_ESP", {
+        fetch("http://192.168.1.129/Door/Command_to_ESP", {
           method: 'POST',
           headers: {
               'Accept': 'application/json',
@@ -67,6 +63,7 @@ import { WebView } from 'react-native-webview';
                   "Response Body -> " + JSON.stringify(responseData)
               )
           })
+          .catch(error => alert(error.message))
           .done();
       }
     }
@@ -74,22 +71,15 @@ import { WebView } from 'react-native-webview';
       fetchStatusDoor();
     }, [])
   return (
-    <SafeAreaView style={styles.container}
-              refreshControl={
-          <RefreshControl
-              refreshing={isLoading}
-                onRefresh={fetchStatusDoor}
-              />
-             }>
+    <SafeAreaView style={styles.container}>
     <ImageBackground style={styles.container}
                       source = {{uri: 'https://i.ibb.co/JpjYNWX/loginpng1.png'}}
     >
     <View>
-    {isLoading ? <ActivityIndicator style={styles.loading}/>:(
       <View style={styles.switchcontainer}
       >
       <Text style={styles.text}>
-        {(switchVal && data.status == "openning") ? 'Door OPEN' : 'Door CLOSE'}
+        {(switchVal) ? 'Door OPEN' : 'Door CLOSE'}
       </Text>
       <Switch
         style={styles.switch}
@@ -99,7 +89,7 @@ import { WebView } from 'react-native-webview';
         onValueChange={handleControlDoor}
         value={switchVal}
       />
-      </View>)}
+      </View>
       </View>
       <View style={styles.containerwebview}>
       <WebView
@@ -108,7 +98,7 @@ import { WebView } from 'react-native-webview';
         scalesPageToFit={true}
         startInLoadingState={false}
         contentInset={{ top: 0, right: 0, left: 0, bottom: 0,}}
-        source={{ uri: 'https://youtu.be/Sq6DbnBf7mo' }} />
+        source={{ uri: 'http://192.168.1.134/' }} />
       </View>
       </ImageBackground>
     </SafeAreaView>

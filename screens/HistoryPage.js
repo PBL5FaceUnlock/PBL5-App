@@ -3,7 +3,7 @@ import React , {useState,useEffect} from 'react'
 import { ActivityIndicator } from 'react-native-paper';
 import ItemHistory from '../components/ItemHistory';
 
-const APIURL = 'http://171.225.184.216/Image_To_Android/?format=json';
+const APIURL = 'http://192.168.1.129/Image_To_Android/?format=json';
 
 const HistoryPage = () => {
   const [Door,setDoor] = useState('front');
@@ -29,7 +29,7 @@ const HistoryPage = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-        <ImageBackground style={styles.container}
+    <ImageBackground style={styles.container}
                     source = {{uri: 'https://i.ibb.co/JpjYNWX/loginpng1.png'}}>
     <View style={styles.pickercontainer}>
       <Picker
@@ -38,7 +38,6 @@ const HistoryPage = () => {
         onValueChange={(itemDoor) => setDoor(itemDoor)} 
       >
         <Picker.Item label='Front' value='Front'/>
-        <Picker.Item label='Back' value='Back'/>
       </Picker>
       </View>
       {isLoading ? <ActivityIndicator style={styles.loading}/>:(
@@ -47,6 +46,8 @@ const HistoryPage = () => {
           contentContainerStyle={styles.listContainer}
           data={data}
           horizontal={false}
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
           renderItem={({item}) => <ItemHistory historyData={item}/>}
           keyExtractor={item => `key-${item.id}`}
           refreshControl={
@@ -76,20 +77,20 @@ const styles = StyleSheet.create({
     color:'black'
   },
   list:{
-    backgroundColor:"#FDA43C",
+    // backgroundColor:"#FDA43C",
     alignSelf:'center',
     
+  },
+  header: {
+    width: '100%',
+    height: 40,
+    alignItems: 'flex-end',
+    justifyContent: 'center',
   },
   listContainer:{
     alignItems:'center',
     alignSelf:'center',
-    backgroundColor:"#FDA43C",
-  },
-  modalBackGround: {
-    flex: 1,
-    backgroundColor: '#FDA43C',
-    justifyContent: 'center',
-    alignItems: 'center',
+    // backgroundColor:"#FDA43C",
   },
   modalContainer: {
     width: '90%',

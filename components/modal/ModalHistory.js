@@ -1,6 +1,9 @@
 import { View, Text,Image,Animated, Modal, StyleSheet, TouchableOpacity } from 'react-native'
 import React , {useState,useEffect} from 'react'
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
+
+const icondatetime = '././assets/icondatetime.png'
 const ModalHistory = ({historyData, visible, handleVisible}) => {
     console.log('historyData ModalHistory: ', historyData)
     const {time = '', user = '', id = '', Image_recognize_main = ''} = historyData || {}
@@ -11,7 +14,7 @@ const ModalHistory = ({historyData, visible, handleVisible}) => {
             <TouchableOpacity onPress={() => handleVisible(false)}>
               <Image
                 source={{uri:'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/OOjs_UI_icon_close.svg/2048px-OOjs_UI_icon_close.svg.png'}}
-                style={{height: 30, width: 30, bottom:10,}}
+                style={{height: 40, width: 40,}}
               />
             </TouchableOpacity>
           </View>
@@ -19,18 +22,30 @@ const ModalHistory = ({historyData, visible, handleVisible}) => {
         <Text style={styles.textid}> 
           {id}
         </Text>
-        <View style={{marginTop:-20,alignItems: 'center', borderColor:'#FDA43C', borderWidth:8,borderRadius:110}}>
+        <View style={{marginTop:-20,alignItems: 'center', borderColor:'#FDA43C', borderWidth:8,borderRadius:30}}>
           <Image
             source={{uri: Image_recognize_main}}
-            style={{height: 300, width: 300, borderRadius:100}}
+            style={{height: 300, width: 300, borderRadius:20}}
           />
         </View>
+        <View style={styles.header1}>
+        <Image
+                source={{uri:"https://img.icons8.com/officel/344/user.png"}}
+                style={styles.icondatetime}
+              />
         <Text style={styles.text}>
           {user}
         </Text>
+        </View>
+        <View style={styles.header1}>
+        <Image
+                source={{uri:"https://img.icons8.com/plasticine/344/overtime.png"}}
+                style={styles.icondatetime}
+              />
         <Text style={styles.text}>
           {time}
         </Text>
+        </View>
       </ModalPoup>
     )
 }
@@ -108,13 +123,13 @@ const ModalPoup = ({visible, children}) =>{
     },
     modalBackGround: {
       flex: 1,
-      backgroundColor: '#FDA43C',
+      // backgroundColor: '#FDA43C',
       justifyContent: 'center',
       alignItems: 'center',
     },
     modalContainer: {
       width: '90%',
-      height:'90%',
+      height:'80%',
       backgroundColor: 'white',
       paddingHorizontal: 20,
       paddingVertical: 30,
@@ -124,23 +139,32 @@ const ModalPoup = ({visible, children}) =>{
     header: {
       width: '100%',
       height: 40,
+      top:10,
       alignItems: 'flex-end',
       justifyContent: 'center',
     },
     text: {
-        marginVertical: 30,
-        fontSize: 20,
+        marginVertical:25,
+        fontSize: 25,
         textAlign: 'center',
         color: '#FDA43C',
         fontWeight: 'bold'
     },
     textid:{
-      bottom:20,
-      marginVertical: 30,
-      fontSize: 20,
+      bottom:50,
+      fontSize: 30,
       textAlign: 'center',
       color: '#FDA43C',
       fontWeight: 'bold'
+    },
+    icondatetime:{
+      height:40,
+      width:40,
+      marginBottom:-20,
+    },
+    header1:{
+      alignItems: 'center',
+      padding:5,
     }
     
   })
