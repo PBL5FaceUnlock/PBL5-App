@@ -1,6 +1,9 @@
 import { View, Text, Switch, SafeAreaView,RefreshControl, ImageBackground,StyleSheet} from 'react-native'
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect,useContext} from 'react'
 import { WebView } from 'react-native-webview';
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { CredentialsContext } from '../components/CredentialsContext';
+
 
   const APIDoorURL = 'http://192.168.1.129/Door/Doors?format=json'
 
@@ -9,6 +12,7 @@ import { WebView } from 'react-native-webview';
   const ControlScreen = () => {
     const [switchVal, setSwitchVal] = useState(false);
     const [data, setData] = useState([]);
+    const {storedCredentials, setStoredCredentials} = useContext(CredentialsContext);
     const fetchStatusDoor = async () => {
       try{
         const response = await fetch(APIDoorURL)
@@ -18,11 +22,11 @@ import { WebView } from 'react-native-webview';
         console.log("Error on fetchStatusDoor: ", e)
       }
     }
-    const handleControlDoor = () => {
+    const handleControlDoor = async () => {
       setSwitchVal((switchVal) => !switchVal)
       if(!switchVal)
       {
-      fetch("http://192.168.1.129/Door/Command_to_ESP", {
+        await fetch("http://192.168.1.129/Door/Command_to_ESP", {
           method: 'POST',
           headers: {
               'Accept': 'application/json',
@@ -45,7 +49,7 @@ import { WebView } from 'react-native-webview';
       }
       else
       {
-        fetch("http://192.168.1.129/Door/Command_to_ESP", {
+        await fetch("http://192.168.1.129/Door/Command_to_ESP", {
           method: 'POST',
           headers: {
               'Accept': 'application/json',
@@ -67,9 +71,10 @@ import { WebView } from 'react-native-webview';
           .done();
       }
     }
-    useEffect(() => {
-      fetchStatusDoor();
+    useEffect(async () => {
+      await fetchStatusDoor();
     }, [])
+    
   return (
     <SafeAreaView style={styles.container}>
     <ImageBackground style={styles.container}

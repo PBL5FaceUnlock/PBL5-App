@@ -1,9 +1,6 @@
 import { View, Text,Image,Animated, Modal, StyleSheet, TouchableOpacity } from 'react-native'
 import React , {useState,useEffect} from 'react'
-import Icon from 'react-native-vector-icons/FontAwesome5';
 
-
-const icondatetime = '././assets/icondatetime.png'
 const ModalHistory = ({historyData, visible, handleVisible}) => {
     console.log('historyData ModalHistory: ', historyData)
     const {time = '', user = '', id = '', Image_recognize_main = ''} = historyData || {}
@@ -144,7 +141,7 @@ const ModalPoup = ({visible, children}) =>{
       justifyContent: 'center',
     },
     text: {
-        marginVertical:25,
+        marginVertical:"5%",
         fontSize: 25,
         textAlign: 'center',
         color: '#FDA43C',
