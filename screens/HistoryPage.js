@@ -2,29 +2,37 @@ import { Picker,StyleSheet, FlatList,SafeAreaView,ImageBackground, RefreshContro
 import React , {useState,useEffect} from 'react'
 import { ActivityIndicator } from 'react-native-paper';
 import ItemHistory from '../components/ItemHistory';
-
-const APIURL = 'http://192.168.1.129/Image_To_Android/?format=json';
+import AsyncStorage from '@react-native-async-storage/async-storage'
+const apiURL = 'http://116.110.222.155:8090/Image_To_Android/?format=json';
 
 const HistoryPage = () => {
   const [Door,setDoor] = useState('front');
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isRefreshAPI, setRefreshAPI] = useState(false);
 
   const fetchDataAllTime = async () => {
     try{
-      setIsLoading(true)
-      const response = await fetch(APIURL)
-      const result = await response.json()
-      setData(result)
+      setIsLoading(true);
+      const historyGroupStorage = await AsyncStorage.getItem('history');
+      if(historyGroupStorage && !isLoading ){
+        setData(JSON.parse(historyGroupStorage));
+        return;
+      }
+      const response = await fetch(apiURL);
+      const result = await response.json();
+      await AsyncStorage.setItem('history', JSON.stringify(result));
+      setData(result);
     }catch(e){
-       console.log("Error on fetchDataAllTime: ", e)
+       console.log("Error on fetchDataAllTime: ", e);
     }finally {
       setIsLoading(false)
     }
   }
 
   useEffect(() => {
-    fetchDataAllTime();
+    fetchDataAllTime()
+
   }, [])
 
   return (
@@ -53,7 +61,7 @@ const HistoryPage = () => {
           refreshControl={
           <RefreshControl
               refreshing={isLoading}
-                onRefresh={fetchDataAllTime}
+              onRefresh={fetchDataAllTime}
               />
              }
         />

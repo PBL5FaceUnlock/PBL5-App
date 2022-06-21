@@ -2,8 +2,7 @@ import { View, Text,Image,Animated, Modal, StyleSheet, TouchableOpacity } from '
 import React , {useState,useEffect} from 'react'
 
 const ModalHistory = ({historyData, visible, handleVisible}) => {
-    console.log('historyData ModalHistory: ', historyData)
-    const {time = '', user = '', id = '', Image_recognize_main = ''} = historyData || {}
+      const {time = '', user = '', id = '', Image_recognize_main = ''} = historyData || {}
     return (
         <ModalPoup visible={visible}>
         <View style={{alignItems: 'center'}}>

@@ -1,18 +1,20 @@
 import { View, Text, Switch, SafeAreaView,RefreshControl, ImageBackground,StyleSheet} from 'react-native'
 import React, {useState, useEffect,useContext} from 'react'
 import { WebView } from 'react-native-webview';
-import AsyncStorage from '@react-native-async-storage/async-storage'
+import { ActivityIndicator } from 'react-native-paper';
 import { CredentialsContext } from '../components/CredentialsContext';
 
 
-  const APIDoorURL = 'http://192.168.1.129/Door/Doors?format=json'
-
+  const APIDoorURL = 'http://116.110.222.155:8090/Door/Doors?format=json'
+  const APIControlURL = 'http://116.110.222.155:8090/Door/Command_to_ESP'
 
 
   const ControlScreen = () => {
     const [switchVal, setSwitchVal] = useState(false);
     const [data, setData] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
     const {storedCredentials, setStoredCredentials} = useContext(CredentialsContext);
+    setTimeout(() => {setSwitchVal(false)}, 10000);
     const fetchStatusDoor = async () => {
       try{
         const response = await fetch(APIDoorURL)
@@ -23,17 +25,18 @@ import { CredentialsContext } from '../components/CredentialsContext';
       }
     }
     const handleControlDoor = async () => {
+      setIsLoading(true)
       setSwitchVal((switchVal) => !switchVal)
       if(!switchVal)
       {
-        await fetch("http://192.168.1.129/Door/Command_to_ESP", {
+        await fetch(APIControlURL, {
           method: 'POST',
           headers: {
               'Accept': 'application/json',
               'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-              "value":"openning"
+              "value":"true"
           })
       })
 
@@ -45,18 +48,21 @@ import { CredentialsContext } from '../components/CredentialsContext';
               )
           })
           .catch(error => alert(error.message))
+          .finally(()=>{
+            setIsLoading(false)
+          })
           .done();
       }
       else
       {
-        await fetch("http://192.168.1.129/Door/Command_to_ESP", {
+        await fetch(APIControlURL, {
           method: 'POST',
           headers: {
               'Accept': 'application/json',
               'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-              "value":"closed"
+              "value":"false"
           })
       })
 
@@ -96,15 +102,23 @@ import { CredentialsContext } from '../components/CredentialsContext';
       />
       </View>
       </View>
+    {isLoading ? <ActivityIndicator style={styles.loading}/>:(
       <View style={styles.containerwebview}>
       <WebView
         style={{flex: 1,}}
         automaticallyAdjustContentInsets={true}
         scalesPageToFit={true}
+        renderLoading={
+          <RefreshControl
+              refreshing={isLoading}
+                onRefresh={fetchStatusDoor}
+              />
+             }
         startInLoadingState={false}
         contentInset={{ top: 0, right: 0, left: 0, bottom: 0,}}
-        source={{ uri: 'http://192.168.1.134/' }} />
+        source={{ uri: 'https://4c1e-2402-800-6205-4357-f496-acd0-641c-2904.ap.ngrok.io/' }} />
       </View>
+      )}
       </ImageBackground>
     </SafeAreaView>
   )

@@ -3,12 +3,10 @@ import React , {useState} from 'react'
 import ModalHistory from './modal/ModalHistory'
 
 const ItemHistory = ({historyData}) => {
-    // console.log('historyData: ', historyData)
-    // console.log('----------------------------------------------------------')
 
     const [isVisibleModal, setVisibleModal] = useState(false)
     return(
-        <TouchableOpacity style={[styles.card, {backgroundColor:"#f2f2f2"}]}
+        <TouchableOpacity style={historyData.door.status == 'closed' ? [styles.card, {backgroundColor:"#d90429"}]:[styles.card, {backgroundColor:"#00b200"}]}
             onPress={() => setVisibleModal(!isVisibleModal)}>
             <ModalHistory 
             historyData = {historyData} 
