@@ -7,7 +7,7 @@
 ----------
 
 ## ScreenShots
-![Login Screen](https://i.ibb.co/qp1pRf8/Login.jpg =138x300)
+![Login Screen](https://i.ibb.co/qp1pRf8/Login.jpg|width=138)
 
 ![SignUp Screen](https://i.ibb.co/KN6B3x1/SignUp.jpg|width=138)
 
