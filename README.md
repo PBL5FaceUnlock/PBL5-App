@@ -7,17 +7,23 @@
 ----------
 
 ## ScreenShots
-![Login Screen]<img src="https://i.ibb.co/qp1pRf8/Login.jpg" width="138" height="300">
+Login Screen
+<img src="https://i.ibb.co/qp1pRf8/Login.jpg" width="231" height="500">
 
-![SignUp Screen]<img src="https://i.ibb.co/KN6B3x1/SignUp.jpg" width="138" height="300">
+SignUp Screen
+<img src="https://i.ibb.co/KN6B3x1/SignUp.jpg" width="231" height="500">
 
-![Home Screen]<img src="https://i.ibb.co/5MSSd04/home.jpg" width="138" height="300">
+Home Screen
+<img src="https://i.ibb.co/5MSSd04/home.jpg" width="231" height="500">
 
-![Control Screen]<img src="https://i.ibb.co/DLNJBXj/control.jpg" width="138" height="300">
+Control Screen
+<img src="https://i.ibb.co/DLNJBXj/control.jpg" width="231" height="500">
 
-![History Screen]<img src="https://i.ibb.co/SNJgstL/history.jpg" width="138" height="300">
+History Screen
+<img src="https://i.ibb.co/SNJgstL/history.jpg" width="231" height="500">
 
-![HistoryDetails Screen]<img src="https://i.ibb.co/SrTtTLM/historydetail.jpg" width="138" height="300">
+HistoryDetails Screen
+<img src="https://i.ibb.co/SrTtTLM/historydetail.jpg" width="231" height="500">
 
 ## Getting Started
 1. Install the latest Node
