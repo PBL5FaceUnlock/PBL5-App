@@ -7,8 +7,8 @@
 ----------
 
 ## ScreenShots
-![Login Screen](https://lh3.googleusercontent.com/OpLWDaPqbC7EGECWacIMOLuJh5g4C0IQxjXeiQuUCYpXmq_2Vdqsca5p4N95MsJvnvY=h900](https://i.ibb.co/qp1pRf8/Login.jpg)
-![SignUp Screen](https://lh3.googleusercontent.com/Q1vnSrC6f4lSto-VFep4ASgKCwmWCPJXNRoT7T9TKRGx1Blsrw3yv2qp5VcDya4UpQ=h900](https://i.ibb.co/KN6B3x1/SignUp.jpg)
+![Login Screen]((https://i.ibb.co/qp1pRf8/Login.jpg)
+![SignUp Screen](https://i.ibb.co/KN6B3x1/SignUp.jpg)
 ![Home Screen](https://i.ibb.co/5MSSd04/home.jpg)
 ![Control Screen](https://i.ibb.co/DLNJBXj/control.jpg)
 ![History Screen](https://i.ibb.co/SNJgstL/history.jpg)
@@ -26,9 +26,9 @@
 - [Server Django REST Framework By FatalMistake](localhost:port/{input})
 
 ## Thanks My Team
-* [Quách Minh Nhật - Server: ](https://www.facebook.com/rum.quach.3)
+* [Ngô Lê Gia Hưng - AI and Detected: ](https://www.facebook.com/rum.quach.3)
 [![](https://scontent.fhan14-1.fna.fbcdn.net/v/t1.6435-9/120433927_1500519803491813_6633119669710735679_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=174925&_nc_ohc=Nk1T1G1U1HoAX8PDbDa&_nc_ht=scontent.fhan14-1.fna&oh=00_AT_SS54eKNblSMpF8zf_FRwLKRvF0QYRTlNt5dhuPVj9ug&oe=62DA11D5)
-* [Ngô Lê Gia Hưng - AI and Detected: ](https://www.facebook.com/Ryn.super)
+* [Quách Minh Nhật - Server: ](https://www.facebook.com/Ryn.super)
 [![](https://scontent.fhan14-2.fna.fbcdn.net/v/t1.6435-9/151330995_2950197591970795_6455962273416497210_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=XmucerK9fasAX-FjVvk&_nc_ht=scontent.fhan14-2.fna&oh=00_AT9QF-JZu2xsPlraF6s4fbcNQxbWj9NHlyUQk-YiUojC7Q&oe=62DB3798)
 
 ## About Author
