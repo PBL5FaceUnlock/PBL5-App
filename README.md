@@ -7,17 +7,17 @@
 ----------
 
 ## ScreenShots
-![Login Screen](https://i.ibb.co/qp1pRf8/Login.jpg|width=138px)
+![Login Screen]<img src="https://i.ibb.co/qp1pRf8/Login.jpg" width="138" height="300">
 
-![SignUp Screen]([https://i.ibb.co/KN6B3x1/SignUp.jpg|width=138px])
+![SignUp Screen]<img src="https://i.ibb.co/KN6B3x1/SignUp.jpg" width="138" height="300">
 
-![Home Screen](https://i.ibb.co/5MSSd04/home.jpg|width=138px)
+![Home Screen]<img src="https://i.ibb.co/5MSSd04/home.jpg" width="138" height="300">
 
-![Control Screen](https://i.ibb.co/DLNJBXj/control.jpg|width=138px)
+![Control Screen]<img src="https://i.ibb.co/DLNJBXj/control.jpg" width="138" height="300">
 
-![History Screen](https://i.ibb.co/SNJgstL/history.jpg|width=138px)
+![History Screen]<img src="https://i.ibb.co/SNJgstL/history.jpg" width="138" height="300">
 
-![HistoryDetails Screen](https://i.ibb.co/SrTtTLM/historydetail.jpg|width=138px)
+![HistoryDetails Screen]<img src="https://i.ibb.co/SrTtTLM/historydetail.jpg" width="138" height="300">
 
 ## Getting Started
 1. Install the latest Node
