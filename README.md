@@ -7,11 +7,16 @@
 ----------
 
 ## ScreenShots
-![Login Screen]((https://i.ibb.co/qp1pRf8/Login.jpg)
+![Login Screen](https://i.ibb.co/qp1pRf8/Login.jpg)
+
 ![SignUp Screen](https://i.ibb.co/KN6B3x1/SignUp.jpg)
+
 ![Home Screen](https://i.ibb.co/5MSSd04/home.jpg)
+
 ![Control Screen](https://i.ibb.co/DLNJBXj/control.jpg)
+
 ![History Screen](https://i.ibb.co/SNJgstL/history.jpg)
+
 ![HistoryDetails Screen](https://i.ibb.co/SrTtTLM/historydetail.jpg)
 
 ## Getting Started
