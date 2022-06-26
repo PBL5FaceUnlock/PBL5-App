@@ -30,7 +30,8 @@ HistoryDetails Screen
 2. Install [Expo](https://expo.io/) - `npm install expo-cli --global`
 3. `cd` into this project directory
 4. `npm install` or `yarn install`
-5. Run `expo start`
+5. Add urls API - Server
+6. Run `expo start`
 
 ## API's Used
 
