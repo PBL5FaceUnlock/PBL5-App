@@ -3,7 +3,7 @@ import React , {useState,useEffect} from 'react'
 import { ActivityIndicator } from 'react-native-paper';
 import ItemHistory from '../components/ItemHistory';
 import AsyncStorage from '@react-native-async-storage/async-storage'
-const apiURL = 'http://116.110.222.155:8090/Image_To_Android/?format=json';
+const apiURL = 'http://192.168.121.61:8090/Image_To_Android/?format=json';
 
 const HistoryPage = () => {
   const [Door,setDoor] = useState('front');
@@ -15,18 +15,18 @@ const HistoryPage = () => {
     try{
       setIsLoading(true);
       const historyGroupStorage = await AsyncStorage.getItem('history');
-      if(historyGroupStorage && !isLoading ){
+      if(historyGroupStorage && !isRefreshAPI ){
         setData(JSON.parse(historyGroupStorage));
-        return;
       }
-      const response = await fetch(apiURL);
-      const result = await response.json();
-      await AsyncStorage.setItem('history', JSON.stringify(result));
-      setData(result);
+        const response = await fetch(apiURL);
+        const result = await response.json();
+        await AsyncStorage.setItem('history', JSON.stringify(result));
+        setData(result);
     }catch(e){
        console.log("Error on fetchDataAllTime: ", e);
     }finally {
-      setIsLoading(false)
+      setIsLoading(true)
+      
     }
   }
 
@@ -48,7 +48,7 @@ const HistoryPage = () => {
         <Picker.Item label='Front' value='Front'/>
       </Picker>
       </View>
-      {isLoading ? <ActivityIndicator style={styles.loading}/>:(
+      {/* {isLoading ? <ActivityIndicator style={styles.loading}/>:( */}
         <FlatList
           style={styles.list} 
           contentContainerStyle={styles.listContainer}
@@ -60,12 +60,12 @@ const HistoryPage = () => {
           keyExtractor={item => `key-${item.id}`}
           refreshControl={
           <RefreshControl
-              refreshing={isLoading}
+              refreshing={isRefreshAPI}
               onRefresh={fetchDataAllTime}
               />
              }
         />
-      )}
+      {/* )} */}
       </ImageBackground>
     </SafeAreaView>
   )
