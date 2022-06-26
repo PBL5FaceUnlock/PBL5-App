@@ -1,12 +1,12 @@
 import { View, Text, Switch, SafeAreaView,RefreshControl, ImageBackground,StyleSheet} from 'react-native'
-import React, {useState, useEffect,useContext} from 'react'
+import React, {useState, useEffect,useContext,useRef} from 'react'
 import { WebView } from 'react-native-webview';
 import { ActivityIndicator } from 'react-native-paper';
 import { CredentialsContext } from '../components/CredentialsContext';
 
 
-  const APIDoorURL = 'http://116.110.222.155:8090/Door/Doors?format=json'
-  const APIControlURL = 'http://116.110.222.155:8090/Door/Command_to_ESP'
+  const APIDoorURL = 'http://192.168.121.61:8090/Door/Doors?format=json'
+  const APIControlURL = 'http://192.168.121.61:8090/Door/Command_to_ESP'
 
 
   const ControlScreen = () => {
@@ -77,8 +77,7 @@ import { CredentialsContext } from '../components/CredentialsContext';
           .done();
       }
     }
-    useEffect(async () => {
-      await fetchStatusDoor();
+    useEffect(() => {
     }, [])
     
   return (
@@ -102,23 +101,15 @@ import { CredentialsContext } from '../components/CredentialsContext';
       />
       </View>
       </View>
-    {isLoading ? <ActivityIndicator style={styles.loading}/>:(
       <View style={styles.containerwebview}>
       <WebView
         style={{flex: 1,}}
         automaticallyAdjustContentInsets={true}
         scalesPageToFit={true}
-        renderLoading={
-          <RefreshControl
-              refreshing={isLoading}
-                onRefresh={fetchStatusDoor}
-              />
-             }
         startInLoadingState={false}
         contentInset={{ top: 0, right: 0, left: 0, bottom: 0,}}
-        source={{ uri: 'https://4c1e-2402-800-6205-4357-f496-acd0-641c-2904.ap.ngrok.io/' }} />
+        source={{ uri: 'http://192.168.121.32/' }} />
       </View>
-      )}
       </ImageBackground>
     </SafeAreaView>
   )

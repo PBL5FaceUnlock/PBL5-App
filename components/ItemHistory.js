@@ -6,7 +6,7 @@ const ItemHistory = ({historyData}) => {
 
     const [isVisibleModal, setVisibleModal] = useState(false)
     return(
-        <TouchableOpacity style={historyData.door.status == 'closed' ? [styles.card, {backgroundColor:"#d90429"}]:[styles.card, {backgroundColor:"#00b200"}]}
+        <TouchableOpacity style={historyData.user == 'unknown' ? [styles.card, {backgroundColor:"#d90429"}]:[styles.card, {backgroundColor:"#00b200"}]}
             onPress={() => setVisibleModal(!isVisibleModal)}>
             <ModalHistory 
             historyData = {historyData} 
