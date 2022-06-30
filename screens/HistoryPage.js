@@ -3,7 +3,7 @@ import React , {useState,useEffect} from 'react'
 import { ActivityIndicator } from 'react-native-paper';
 import ItemHistory from '../components/ItemHistory';
 import AsyncStorage from '@react-native-async-storage/async-storage'
-const apiURL = 'http://192.168.121.61:8090/Image_To_Android/?format=json';
+const apiURL = 'http://192.168.23.61:8090/Image_To_Android/?format=json';
 
 const HistoryPage = () => {
   const [Door,setDoor] = useState('front');
@@ -14,6 +14,7 @@ const HistoryPage = () => {
   const fetchDataAllTime = async () => {
     try{
       setIsLoading(true);
+      setRefreshAPI(false);
       const historyGroupStorage = await AsyncStorage.getItem('history');
       if(historyGroupStorage && !isRefreshAPI ){
         setData(JSON.parse(historyGroupStorage));

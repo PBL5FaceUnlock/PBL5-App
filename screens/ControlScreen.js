@@ -1,29 +1,20 @@
-import { View, Text, Switch, SafeAreaView,RefreshControl, ImageBackground,StyleSheet} from 'react-native'
+import { View, Text, Switch, SafeAreaView, ImageBackground,StyleSheet} from 'react-native'
 import React, {useState, useEffect,useContext,useRef} from 'react'
 import { WebView } from 'react-native-webview';
 import { ActivityIndicator } from 'react-native-paper';
 import { CredentialsContext } from '../components/CredentialsContext';
 
 
-  const APIDoorURL = 'http://192.168.121.61:8090/Door/Doors?format=json'
-  const APIControlURL = 'http://192.168.121.61:8090/Door/Command_to_ESP'
+  const APIDoorURL = 'http://192.168.23.61:8090/Door/Doors?format=json'
+  const APIControlURL = 'http://192.168.23.61:8090/Door/Command_to_ESP'
 
 
-  const ControlScreen = () => {
+  const ControlScreen = ({navigation}) => {
+    const webViewRef = useRef();
     const [switchVal, setSwitchVal] = useState(false);
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-    const {storedCredentials, setStoredCredentials} = useContext(CredentialsContext);
-    setTimeout(() => {setSwitchVal(false)}, 10000);
-    const fetchStatusDoor = async () => {
-      try{
-        const response = await fetch(APIDoorURL)
-        const result = await response.json()
-        setData(result)
-      }catch(e){
-        console.log("Error on fetchStatusDoor: ", e)
-      }
-    }
+    setTimeout(() => {setSwitchVal(false)}, 20000);
     const handleControlDoor = async () => {
       setIsLoading(true)
       setSwitchVal((switchVal) => !switchVal)
@@ -53,32 +44,46 @@ import { CredentialsContext } from '../components/CredentialsContext';
           })
           .done();
       }
-      else
-      {
-        await fetch(APIControlURL, {
-          method: 'POST',
-          headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-              "value":"false"
-          })
-      })
+      // else
+      // {
+      //   await fetch(APIControlURL, {
+      //     method: 'POST',
+      //     headers: {
+      //         'Accept': 'application/json',
+      //         'Content-Type': 'application/json'
+      //     },
+      //     body: JSON.stringify({
+      //         "value":"false"
+      //     })
+      // })
 
-          .then((response) => response.json())
-          .then((responseData) => {
-              console.log(
-                  "POST Response",
-                  "Response Body -> " + JSON.stringify(responseData)
-              )
-          })
-          .catch(error => alert(error.message))
-          .done();
-      }
+      //     .then((response) => response.json())
+      //     .then((responseData) => {
+      //         console.log(
+      //             "POST Response",
+      //             "Response Body -> " + JSON.stringify(responseData)
+      //         )
+      //     })
+      //     .catch(error => alert(error.message))
+      //     .done();
+      // }
     }
+    // useEffect(() => {
+    //   const unsubscribe = navigation.addListener('focus', () => {
+    //     // The screen is focused
+    //   });
+  
+    //   // Return the function to unsubscribe from the event so it gets removed on unmount
+    //   return () => unsubscribe
+    // }, [navigation]);
+
     useEffect(() => {
-    }, [])
+      const unsubscribe = navigation.addListener('focus' ,() => {
+        webViewRef.current.reload();
+        console.log('focus')
+      });
+      // return () => unsubscribe;
+    }, [navigation])
     
   return (
     <SafeAreaView style={styles.container}>
@@ -103,12 +108,14 @@ import { CredentialsContext } from '../components/CredentialsContext';
       </View>
       <View style={styles.containerwebview}>
       <WebView
+        ref={(ref) => webViewRef.current = ref}
         style={{flex: 1,}}
+        cacheEnable={false}
         automaticallyAdjustContentInsets={true}
         scalesPageToFit={true}
         startInLoadingState={false}
         contentInset={{ top: 0, right: 0, left: 0, bottom: 0,}}
-        source={{ uri: 'http://192.168.121.32/' }} />
+        source={{ uri: 'http://192.168.23.94/' }} />
       </View>
       </ImageBackground>
     </SafeAreaView>
