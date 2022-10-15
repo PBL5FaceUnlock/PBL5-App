@@ -44,7 +44,7 @@ HistoryDetails Screen
 [![](https://scontent.fhan14-2.fna.fbcdn.net/v/t1.6435-9/151330995_2950197591970795_6455962273416497210_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=XmucerK9fasAX-FjVvk&_nc_ht=scontent.fhan14-2.fna&oh=00_AT9QF-JZu2xsPlraF6s4fbcNQxbWj9NHlyUQk-YiUojC7Q&oe=62DB3798)
 
 ## About Author
-* Built with React Native by [Mạnh Đức](https://www.facebook.com/taurusfbi04/) / [taurusfbi10@gmail.com](mailto:taurusfbi10@gmail.com)
+* Build with React Native by [Mạnh Đức](https://www.facebook.com/taurusfbi04/) / [taurusfbi10@gmail.com](mailto:taurusfbi10@gmail.com)
 [![](https://scontent.fhan14-2.fna.fbcdn.net/v/t1.6435-9/94753504_2522640064718313_850622671019311104_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=174925&_nc_ohc=T58-2Xp8DLMAX_IJXGF&_nc_ht=scontent.fhan14-2.fna&oh=00_AT8v-qIlqa5D3BfUOxJr-KtqkNehfUPefOBSu4DABacAkQ&oe=62DCBD0E)
 
 
